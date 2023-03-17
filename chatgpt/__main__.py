@@ -20,6 +20,12 @@ def main():
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        "--model",
+        "-m",
+        default="gpt-3.5-turbo",
+        help="The name of the GPT-3 model to use",
+    )
+    parser.add_argument(
         "paths", nargs="*", default=[], help="Filepaths or globlike strings"
     )
     parser.add_argument(
@@ -35,7 +41,7 @@ def main():
 
     files, snapshot = take_snapshot(*args.paths, filenames_only=args.filenames_only)
 
-    model = "gpt-3.5-turbo"
+    model = args.model
     messages = []
 
     def print_message(content, role=None, **kwargs):
